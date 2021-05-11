@@ -17,7 +17,7 @@
 >
 > 6. Funções adicionais incorporadas ao Termômetro Digital serão pontuadas, desde que, as condições iniciais tenham sido atendidas.  
 >
- **É dada a liberdade para a equipe escolher a placa Arduino, bem como, seus acessórios.**
+É dada a liberdade para a equipe escolher a placa Arduino, bem como, seus acessórios.
 
 
 ## Equipe
