@@ -23,7 +23,7 @@
 ## Equipe
 
 
-> Amanda 
-> Benilton Andrade 
-> Emerson
-> Mayumi
+ - Amanda 
+ - Benilton Andrade 
+ - Emerson
+ - Mayumi
