@@ -23,7 +23,7 @@
 ## Equipe
 
 
- - Amanda 
- - Benilton Andrade 
- - Emerson
- - Mayumi
+ - Amanda da Silva Barbosa 
+ - Benilton Seixas Andrade 
+ - Emerson da Silva Muniz
+ - Ingrid Mayumi Fonseca Ono
