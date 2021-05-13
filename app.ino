@@ -3,28 +3,47 @@
 #include <idDHT11.h>
 
 
-#define buzzer_pin 3       // Definir a porta 03 para acionar Buzzer
-#define idDHT11pin 2       //Porta Digital do Arduino onde o Sinal do Sensor DHT esta conectado
-#define idDHT11intNumber 0 //Número da interrupção respectiva à porta definida no parametro anterior (veja tabela acima)
+#define buzzer_pin 3       
+#define idDHT11pin 2       
+#define idDHT11intNumber 0 
+#define threadSleep 700
 
-void dht11_wrapper();
-void loopDHT();
-void outOfRange();
+
 void minTemperature();
 void maxTemperature();
+void dht11_wrapper();
+void outOfRange();
+void loopDHT();
 
+
+idDHT11 DHT11(idDHT11pin, idDHT11intNumber, dht11_wrapper);   
 ThreadController threadController = ThreadController();
 ThreadController groupOfThreads = ThreadController();
 Thread minTemperatureThread = Thread();
 Thread maxTemperatureThread = Thread();
 Thread outOfRangeThread = Thread();
 
-idDHT11 DHT11(idDHT11pin, idDHT11intNumber, dht11_wrapper);   //Instanciação do Objeto de Controle do Sensor
 
-float max_temp = 0;
 float temperaturaC;
+float max_temp;
 float min_temp;
-int controller = 0;
+static bool controller = false;
+
+
+void setup(){
+  Serial.begin(9600);
+  pinMode(buzzer_pin, OUTPUT);
+  digitalWrite(buzzer_pin, LOW); 
+
+  createThread();
+  createGroup();
+}
+
+
+void loop(){
+  loopDHT(); 
+  threadController.run();
+}
 
 
 void outOfRange(){
@@ -61,32 +80,23 @@ void maxTemperature(){
 }
 
 
-void setup(){
-  Serial.begin(9600);
-  pinMode(buzzer_pin, OUTPUT);
-  digitalWrite(buzzer_pin, LOW); 
-
-  minTemperatureThread.setInterval(700);
+void createThread(){
+  minTemperatureThread.setInterval(threadSleep);
+  maxTemperatureThread.setInterval(threadSleep);
+  outOfRangeThread.setInterval(threadSleep);
+  
   minTemperatureThread.onRun(minTemperature);
-
-  maxTemperatureThread.setInterval(700);
   maxTemperatureThread.onRun(maxTemperature);
-
-  outOfRangeThread.setInterval(700);
   outOfRangeThread.onRun(outOfRange);
+}
 
+
+void createGroup(){
   groupOfThreads.add(&minTemperatureThread);
   groupOfThreads.add(&maxTemperatureThread);
   groupOfThreads.add(&outOfRangeThread);
   
   threadController.add(&groupOfThreads);
-  
-}
-
-
-void loop(){
-  loopDHT(); 
-  threadController.run();
 }
 
 
@@ -115,7 +125,7 @@ void loopDHT() {
     if (!isnan(valor)) {             
       temperaturaC = valor;
 
-      if (controller == 0 ){   
+      if (!controller){   
         min_temp = temperaturaC;
         max_temp = temperaturaC;
     
@@ -124,7 +134,8 @@ void loopDHT() {
     
         Serial.print(max_temp, 2); // debug
         Serial.println(" °C MAX init"); // debug
-        controller = 1;
+        
+        controller = true;
       }
     }
 
