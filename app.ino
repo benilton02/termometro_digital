@@ -1,145 +1,123 @@
+#include <LiquidCrystal_I2C.h>
 #include <ThreadController.h>
-#include <idDHT11.h>
 #include <Thread.h>
+#include <dht.h>
 
-
-#define idDHT11intNumber 0 
-#define readingTime 1000
 #define threadSleep 700
-#define idDHT11pin 2       
-#define buzzer_pin 3       
+#define DHT11_PIN 2
+#define address 0x27       
+#define row 2
+#define column 16
+#define buzzer_pin 13
 
-
-void dht11Wrapper();
-void minCelsius();
-void maxCelsius();
-void outOfRange();
-void loopDHT();
-
-
-idDHT11 DHT11(idDHT11pin, idDHT11intNumber, dht11Wrapper);   
+LiquidCrystal_I2C lcd(address, column, row);
 ThreadController threadController = ThreadController();
-ThreadController groupOfThreads = ThreadController();
-Thread minCelsiusThread = Thread();
-Thread maxCelsiusThread = Thread();
-Thread outOfRangeThread = Thread();
+Thread showLcdThread = Thread();
+Thread buzzerThread = Thread();
+dht DHT;
 
-
-static bool controller = false;
-float maxValueCelsius;
 float minValueCelsius;
+float maxValueCelsius;
 float celsius;
-
 
 void setup(){
   Serial.begin(9600);
+
   pinMode(buzzer_pin, OUTPUT);
   digitalWrite(buzzer_pin, LOW); 
+  
+  setInitialValues();
+  setLcd();
 
   createThread();
-  createGroup();
+  
 }
 
 
-void loop(){
-  loopDHT(); 
+void loop() {
   threadController.run();
-}
-
-
-void outOfRange(){
-  if (celsius < 25.2 || celsius > 32.6){
-    Serial.print(celsius, 2); // debug
-    Serial.println(" °C"); // debug
-    delay(200);
-    digitalWrite(buzzer_pin, HIGH); 
-    delay(200);
-    digitalWrite(buzzer_pin, LOW);   
-  }
-  else{
-    Serial.print(celsius, 2); // debug
-    Serial.println(" °C"); // debug
-  }
-}
-
-
-void minCelsius(){
-  if (celsius < minValueCelsius){
-    minValueCelsius = celsius;
-    Serial.print(minValueCelsius, 2); // debug
-    Serial.println(" °C minValueCelsius"); // debug
-  }  
-}
-
-
-void maxCelsius(){
-  if (celsius > maxValueCelsius){
-    maxValueCelsius = celsius;
-    Serial.print(maxValueCelsius, 2); // debug
-    Serial.println(" °C maxValueCelsius"); // debug
-  } 
+  Serial.println(celsius, 2);
+  
 }
 
 
 void createThread(){
-  minCelsiusThread.setInterval(threadSleep);
-  maxCelsiusThread.setInterval(threadSleep);
-  outOfRangeThread.setInterval(threadSleep);
+  showLcdThread.setInterval(threadSleep);
+  buzzerThread.setInterval(threadSleep);
   
-  minCelsiusThread.onRun(minCelsius);
-  maxCelsiusThread.onRun(maxCelsius);
-  outOfRangeThread.onRun(outOfRange);
-}
+  showLcdThread.onRun(showCelsius);
+  buzzerThread.onRun(startBuzzer);
 
-
-void createGroup(){
-  groupOfThreads.add(&minCelsiusThread);
-  groupOfThreads.add(&maxCelsiusThread);
-  groupOfThreads.add(&outOfRangeThread);
   
-  threadController.add(&groupOfThreads);
+  threadController.add(&showLcdThread);
+  threadController.add(&buzzerThread);
 }
 
 
-void dht11Wrapper() {
-  DHT11.isrCallback();
-}
-
-
-void loopDHT() {
-  static unsigned long readingDelay = millis() + readingTime + 1;
-  static bool request = false;
-
-  if ((millis() - readingDelay) > readingTime) { 
-      if (!request) {
-        DHT11.acquire(); 
-        request = true;
-      }
-  }
-
-  if (request && !DHT11.acquiring()) {
-    request = false;
-
-    float valor = DHT11.getCelsius();
-     
-    if (!isnan(valor)) {             
-      celsius = valor;
-
-      if (!controller){   
-        minValueCelsius = celsius;
-        maxValueCelsius = celsius;
-    
-        Serial.print(minValueCelsius, 2); // debug
-        Serial.println(" °C MIN init"); // debug
-    
-        Serial.print(maxValueCelsius, 2); // debug
-        Serial.println(" °C MAX init"); // debug
-        
-        controller = true;
-      }
-    }
-
-    readingDelay = millis();     
-
+void startBuzzer(){
+  if (celsius < 25.2 || celsius > 32.6){
+    digitalWrite(buzzer_pin, HIGH); 
+    delay(400);
+    digitalWrite(buzzer_pin, LOW);
+    delay(200);
+    Serial.print(celsius, 2); // debug
+    Serial.println(" °C"); // debug
   }
 }
+
+
+void setInitialValues(){
+  DHT.read11(DHT11_PIN);
+  minValueCelsius = DHT.temperature;
+  maxValueCelsius = DHT.temperature;  
+}
+
+void setLcd(){
+  lcd.init();
+  lcd.backlight();
+  lcd.clear(); 
+}
+
+void showCelsius(){
+  DHT.read11(DHT11_PIN);
+  celsius = DHT.temperature;
+  lcd.setCursor(0, 0);
+  lcd.print("Temp: ");
+  lcd.print(celsius);
+  lcd.write(223);
+  lcd.setCursor(0, 0);
+  lcd.print("");
+
+  lcd.setCursor(8, 1);
+  lcd.print("");
+  lcd.print(maxCelsius());
+  lcd.write(223);
+
+
+  lcd.setCursor(0, 1);
+  lcd.print("");
+  lcd.print(minCelsius());
+  lcd.write(223);
+
+}
+
+float minCelsius(){
+  if (celsius < minValueCelsius){
+    minValueCelsius = celsius;   
+    
+    Serial.print(minValueCelsius, 2); // debug
+    Serial.println(" °C minValueCelsius"); // debug
+  }  
+  return minValueCelsius;
+}
+
+float maxCelsius(){
+  if (celsius > maxValueCelsius){
+    maxValueCelsius = celsius;
+    
+    Serial.print(maxValueCelsius, 2); // debug
+    Serial.println(" °C maxValueCelsius"); // debug
+  } 
+  
+  return  maxValueCelsius;
+  }
