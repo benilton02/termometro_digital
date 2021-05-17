@@ -1,40 +1,35 @@
-## Termômetro Digital
 
-> Desenvolver um protótipo de um Termômetro Digital utilizando Arduino e seus acessórios, de acordo com os requisitos especificados.
+##  Digital Thermometer
 
+> Develop a prototype of a Digital Thermometer using Arduino and its accessories. According to the necessary requirements.
 
-## Requisitos
+##  Requirements
 
->  1.  Deve conter o sensor **DHT-11**, no mínimo;
-> 
->  2.  Deve possuir um **Display LCD**, ou similar, para indicar a temperatura ambiente com duas casas decimais após a vírgula e mostrador de memória de Temperatura Máxima e Temperatura Mínima registradas;
+> 1. It Must contain a temperature sensor m(** DHT-11 **);
 >
-> 3. Um **Buzzer** (sirene) para quando atingir temperaturas fora do  controle **(mínimo = 25,2°C e máximo = 32,6°C)**;
+> 2. It must contain a ** LCD Display **, or similar, to indicate the temperature with two floating point, showing maximum and minimum Temperature on display;
 >
-> 4. Deve ser de fácil locomoção e instalação, ou seja, pequeno, leve, portátil e com **alimentação CC** sem depender de tomada AC;
+> 3. It activate a siren out of the working range **(MIN = 25,2°C e MAX = 32,6°C)**;
 >
-> 5. Deve ter uma estrutura de plástico, madeira, ou qualquer outro tipo de material. O projeto não deve ser apresentado em Protoboard;
+> 4. It should be easy to move and install, i.e., small, lightweight, portable and DC-powered;
 >
-> 6. Funções adicionais incorporadas ao Termômetro Digital serão pontuadas, desde que, as condições iniciais tenham sido atendidas.  
+> 5. It must have a structure made of plastic, wood, or any other kind of material;
 >
-É dada a liberdade para a equipe escolher a placa Arduino, bem como, seus acessórios.
-
-
-## Esquemático
+>
+  
+##  Schematic
 
 ![Esquema Elétrico](https://github.com/benilton02/termometro_digital/blob/main/assets/schematic.png)
 
-
-## Modelo 3D
+##  3D Model
 
 ![top_model](https://github.com/benilton02/termometro_digital/blob/main/assets/top_model.png)
 
 ![bottom_model](https://github.com/benilton02/termometro_digital/blob/main/assets/bottom_model.png)
 
+##  Team
 
-## Equipe
-
- - Amanda da Silva Barbosa 
- - Benilton Seixas Andrade 
- - Emerson da Silva Muniz
- - Ingrid Mayumi Fonseca Ono
+-  Amanda da Silva Barbosa
+-  Benilton Seixas Andrade
+-  Emerson da Silva Muniz
+-  Ingrid Mayumi Fonseca Ono
