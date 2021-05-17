@@ -26,10 +26,3 @@
 ![top_model](https://github.com/benilton02/termometro_digital/blob/main/assets/top_model.png)
 
 ![bottom_model](https://github.com/benilton02/termometro_digital/blob/main/assets/bottom_model.png)
-
-##  Team
-
--  Amanda da Silva Barbosa
--  Benilton Seixas Andrade
--  Emerson da Silva Muniz
--  Ingrid Mayumi Fonseca Ono
