@@ -27,3 +27,7 @@
  - Benilton Seixas Andrade 
  - Emerson da Silva Muniz
  - Ingrid Mayumi Fonseca Ono
+
+## Esquemático
+
+![Esquema Elétrico](https://github.com/benilton02/termometro_digital/blob/main/assets/schematic.png)
