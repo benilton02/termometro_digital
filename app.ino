@@ -16,6 +16,15 @@ Thread showLcdThread = Thread();
 Thread buzzerThread = Thread();
 dht DHT;
 
+void createThread();
+void startBuzzer();
+void setInitialValues();
+void setLcd();
+void showCelsius();
+float minCelsius();
+float maxCelsius();
+
+
 float minValueCelsius;
 float maxValueCelsius;
 float celsius;
@@ -72,11 +81,13 @@ void setInitialValues(){
   maxValueCelsius = DHT.temperature;  
 }
 
+
 void setLcd(){
   lcd.init();
   lcd.backlight();
   lcd.clear(); 
 }
+
 
 void showCelsius(){
   DHT.read11(DHT11_PIN);
@@ -101,6 +112,7 @@ void showCelsius(){
 
 }
 
+
 float minCelsius(){
   if (celsius < minValueCelsius){
     minValueCelsius = celsius;   
@@ -111,6 +123,7 @@ float minCelsius(){
   return minValueCelsius;
 }
 
+
 float maxCelsius(){
   if (celsius > maxValueCelsius){
     maxValueCelsius = celsius;
@@ -120,4 +133,4 @@ float maxCelsius(){
   } 
   
   return  maxValueCelsius;
-  }
+}
