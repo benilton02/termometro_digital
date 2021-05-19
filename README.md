@@ -41,3 +41,10 @@
 ![assembling_4](https://github.com/benilton02/termometro_digital/blob/main/assets/assembling_4.jpeg)
 ![final_assembling](https://github.com/benilton02/termometro_digital/blob/main/assets/final_assembling.jpeg)
 
+
+## Team
+
+> Amanda da Silva Barbosa
+> Benilton Seixas Andrade 
+> Emerson da Silva Muniz
+> Ingrid Mayumi Fonseca Ono
