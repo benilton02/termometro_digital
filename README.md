@@ -45,6 +45,9 @@
 ## Team
 
 > Amanda da Silva Barbosa
+>
 > Benilton Seixas Andrade 
+>
 > Emerson da Silva Muniz
+>
 > Ingrid Mayumi Fonseca Ono
