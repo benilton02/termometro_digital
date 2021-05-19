@@ -32,3 +32,14 @@
 ![close_prototype](https://github.com/benilton02/termometro_digital/blob/main/assets/close_prototype.jpeg)
 
 ![open_prototype](https://github.com/benilton02/termometro_digital/blob/main/assets/open_prototype.jpeg)
+
+## Real Protoype
+
+![assembling_1] (https://github.com/benilton02/termometro_digital/blob/main/assets/assembling_1.jpeg)
+
+![assembling_2] (https://github.com/benilton02/termometro_digital/blob/main/assets/assembling_2.jpeg)
+
+![assembling_3] (https://github.com/benilton02/termometro_digital/blob/main/assets/assembling_3.jpeg)
+
+![assembling_4] (https://github.com/benilton02/termometro_digital/blob/main/assets/assembling_4.jpeg)
+
