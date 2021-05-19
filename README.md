@@ -5,7 +5,7 @@
 
 ##  Requirements
 
-> 1. It Must contain a temperature sensor m(** DHT-11 **);
+> 1. It Must contain a temperature sensor **(DHT-11)**;
 >
 > 2. It must contain a ** LCD Display **, or similar, to indicate the temperature with two floating point, showing maximum and minimum Temperature on display;
 >
@@ -21,8 +21,14 @@
 
 ![Esquema Elétrico](https://github.com/benilton02/termometro_digital/blob/main/assets/schematic.png)
 
-##  3D Model
+##  Kicad - 3D Model 
 
 ![top_model](https://github.com/benilton02/termometro_digital/blob/main/assets/top_model.png)
 
 ![bottom_model](https://github.com/benilton02/termometro_digital/blob/main/assets/bottom_model.png)
+
+## Printing - 3D Model
+
+![close_prototype](https://github.com/benilton02/termometro_digital/blob/main/assets/close_prototype.jpeg)
+
+![open_prototype](https://github.com/benilton02/termometro_digital/blob/main/assets/open_prototype.jpeg)
