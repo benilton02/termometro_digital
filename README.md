@@ -7,7 +7,7 @@
 
 > 1. It Must contain a temperature sensor **(DHT-11)**;
 >
-> 2. It must contain a ** LCD Display **, or similar, to indicate the temperature with two floating point, showing maximum and minimum Temperature on display;
+> 2. It must contain a **LCD Display**, or similar, to indicate the temperature with two floating point, showing maximum and minimum Temperature on display;
 >
 > 3. It activate a siren out of the working range **(MIN = 25,2°C e MAX = 32,6°C)**;
 >
