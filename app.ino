@@ -9,6 +9,7 @@
 #define row 2
 #define column 16
 #define buzzer_pin 13
+#define cf .2
 
 LiquidCrystal_I2C lcd(address, column, row);
 ThreadController threadController = ThreadController();
@@ -25,9 +26,9 @@ float minCelsius();
 float maxCelsius();
 
 
-float minValueCelsius;
-float maxValueCelsius;
-float celsius;
+volatile float minValueCelsius;
+volatile float maxValueCelsius;
+volatile float celsius;
 
 void setup(){
   Serial.begin(9600);
@@ -39,7 +40,6 @@ void setup(){
   setLcd();
 
   createThread();
-  
 }
 
 
@@ -91,7 +91,7 @@ void setLcd(){
 
 void showCelsius(){
   DHT.read11(DHT11_PIN);
-  celsius = DHT.temperature;
+  celsius = DHT.temperature + cf;
   lcd.setCursor(0, 0);
   lcd.print("Temp: ");
   lcd.print(celsius);
