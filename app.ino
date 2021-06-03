@@ -96,20 +96,24 @@ void showCelsius(){
   lcd.print("Temp: ");
   lcd.print(celsius);
   lcd.write(223);
+  lcd.print("C");
   lcd.setCursor(0, 0);
   lcd.print("");
 
   lcd.setCursor(8, 1);
   lcd.print("");
+  lcd.write(20);
   lcd.print(maxCelsius());
   lcd.write(223);
-
+  lcd.print("C");
 
   lcd.setCursor(0, 1);
   lcd.print("");
+  lcd.write(21);
   lcd.print(minCelsius());
   lcd.write(223);
-
+  lcd.print("C");
+  
 }
 
 
